@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<title>Library by DasBobbit</title>
+</head>
+
+<body>
+	<div id="container">
+		<div id="header">
+			<p id="header-text">Your Library</p>
+		</div>
+		<div id="delete-modal" class="modal">
+			<div class="modal-header">
+				<h2 id="header">Are you sure?</h2>
+			</div>
+			<div class="modal-body">
+				<p id="delete-check">Are you sure you want to delete it?</p>
+				<button id="confirm-delete">Yes, delete</button>
+				<button id="cancel-delete">Cancel</button>
+			</div>
+		</div>
+		<div id="myModal" class="modal">
+			<div class="modal-header">
+				<h2 id="header">Add a Book</h2>
+				<span class="close">&times;</span>
+			</div>
+			<div class="modal-body">
+				<div id="new-book">
+					<label for="title">Title</label>
+					<input class="book-entry" id="title" type="text" placeholder="A Game of Thrones">
+					<label for="author">Author</label>
+					<input class="book-entry" id="author" type="text" placeholder="George R. R. Martin">
+					<label for="pages">Pages</label>
+					<input class="book-entry" id="pages" type="number" placeholder="1088">
+					<div id="read-div">
+						<label for="read" class="align-range">Read?</label>
+						<input type="range" class="book-entry align-range" id="read" min="0" max="1" value="0">
+						<label for="read" id="yes-no" class="align-range">No</label>
+					</div>
+					<button id="submit-entry">Submit</button>
+					<p id="incomplete-entry"></p>
+				</div>
+			</div>
+		</div>
+		<div id="displayContainer">
+			<table>
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Author</th>
+						<th>No. of Pages</th>
+						<th>Read</th>
+						<th>Toggle Read</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody id="tbody">
+
+				</tbody>
+			</table>
+			<button id="add-book-popup">Add Book</button>
+		</div>
+	</div>
+
+
+
+
+	<script src="script.js"></script>
+</body>
+
+</html>
