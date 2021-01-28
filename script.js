@@ -2,18 +2,18 @@ const entryInfo = document.querySelectorAll('.book-entry');
 const submitEntryBtn = document.querySelector('#submit-entry');
 const readYesNoSlider = document.querySelector('#read');
 const readYesNoTxt = document.querySelector('#yes-no');
-
 const modal = document.querySelector('#myModal');
 const modalDelete = document.querySelector('#delete-modal');
 const addBookBtn = document.querySelector('#add-book-popup');
 const span = document.getElementsByClassName('close')[0];
 const entryError = document.querySelector('#incomplete-entry');
+const deleteCheckTxt = document.querySelector('#delete-check');
+const confirmDeleteBtn = document.querySelector('#confirm-delete');
+const cancelDeleteBtn = document.querySelector('#cancel-delete');
 
 let myLibrary = [];
 
-const theHobbit = new Book("The Hobbit", "J.R.R. Tolkien", "295", "Not read");
 const theSapiens = new Book("Sapiens", "Yuval Noah Harari", "512", "Read")
-myLibrary.push(theHobbit);
 myLibrary.push(theSapiens);
 
 function Book(title, author, pages, read) {
@@ -24,9 +24,7 @@ function Book(title, author, pages, read) {
 }
 
 function openModal() {
-    console.log(modal);
     modal.style.display = "block";
-    console.log(modal);
 }
 
 function closeModal() {
@@ -37,22 +35,15 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-span.addEventListener('click', closeModal);
-
-addBookBtn.addEventListener('click', openModal);
-
 function addBookToLibrary() {
     // Make sure no fields are empty.
     for (let i = 0; i < entryInfo.length - 1; i++) {
         if (entryInfo[i].value == "") {
-            console.log(entryError);
             entryError.style.color = "red";
             entryError.textContent = "Complete all fields before submitting";
-
             return;
         }
     }
-
     let isRead = entryInfo[3].value == 0 ? "Not read" : "Read";
     Book.prototype = new Book(entryInfo[0].value, entryInfo[1].value,
         entryInfo[2].value, isRead);
@@ -62,21 +53,10 @@ function addBookToLibrary() {
     generateTable();
 }
 
-const deleteCheckTxt = document.querySelector('#delete-check');
-const confirmDeleteBtn = document.querySelector('#confirm-delete');
-const cancelDeleteBtn = document.querySelector('#cancel-delete');
-
 function confirmDeleteBook(e) {
-    console.log(e.path[2].cells);
     deleteCheckTxt.textContent = `Are you sure you want to delete "${e.path[2].cells[0].textContent}" by ${e.path[2].cells[1].textContent}?`;
     modalDelete.style.display = "block";
-
 }
-
-confirmDeleteBtn.addEventListener('click', deleteBook);
-cancelDeleteBtn.addEventListener('click', () => {
-    modalDelete.style.display = "none";
-});
 
 function deleteBook(e) {
 
@@ -91,16 +71,6 @@ function updateRead(e) {
     myLibrary[e.path[2].rowIndex - 1].read = currentRead == "Not read" ? "Read" : "Not read";
     generateTable();
 }
-
-// TODO: When the user clicks anywhere outside of the modal, close it
-// window.addEventListener('click', (event) => {
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// });
-
-submitEntryBtn.addEventListener('click', addBookToLibrary);
-readYesNoSlider.addEventListener('change', () => readYesNoTxt.textContent = readYesNoTxt.textContent == "No" ? "Yes" : "No");
 
 let table = document.querySelector('table');
 let tableKeys = Object.keys(myLibrary[0]);
@@ -143,5 +113,15 @@ function generateTable() {
         deleteBtn.addEventListener('click', confirmDeleteBook);
     }
 }
+
+// Event listeners
+span.addEventListener('click', closeModal);
+addBookBtn.addEventListener('click', openModal);
+confirmDeleteBtn.addEventListener('click', deleteBook);
+cancelDeleteBtn.addEventListener('click', () => {
+    modalDelete.style.display = "none";
+});
+submitEntryBtn.addEventListener('click', addBookToLibrary);
+readYesNoSlider.addEventListener('change', () => readYesNoTxt.textContent = readYesNoTxt.textContent == "No" ? "Yes" : "No");
 
 generateTable();
