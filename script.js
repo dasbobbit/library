@@ -13,15 +13,24 @@ const cancelDeleteBtn = document.querySelector('#cancel-delete');
 
 let myLibrary = [];
 
+class Book {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;    
+    }
+}
+
 const theSapiens = new Book("Sapiens", "Yuval Noah Harari", "512", "Read")
 myLibrary.push(theSapiens);
 
-function Book(title, author, pages, read) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-}
+// function Book(title, author, pages, read) {
+//     this.title = title;
+//     this.author = author;
+//     this.pages = pages;
+//     this.read = read;
+// }
 
 function openModal() {
     modal.style.display = "block";
@@ -45,22 +54,27 @@ function addBookToLibrary() {
         }
     }
     let isRead = entryInfo[3].value == 0 ? "Not read" : "Read";
-    Book.prototype = new Book(entryInfo[0].value, entryInfo[1].value,
-        entryInfo[2].value, isRead);
-    myLibrary.push(Book.prototype);
+    myLibrary.push(new Book(entryInfo[0].value, entryInfo[1].value, entryInfo[2].value, isRead))
+
+    // Book.prototype = new Book(entryInfo[0].value, entryInfo[1].value,
+    //     entryInfo[2].value, isRead);
+    // myLibrary.push(Book.prototype);
 
     closeModal();
     generateTable();
 }
 
+let booktoRemove;
+
 function confirmDeleteBook(e) {
+    bookToRemove = e.path[2].rowIndex - 1;
+    console.log(e);
     deleteCheckTxt.textContent = `Are you sure you want to delete "${e.path[2].cells[0].textContent}" by ${e.path[2].cells[1].textContent}?`;
     modalDelete.style.display = "block";
 }
 
-function deleteBook(e) {
-
-    bookToRemove = myLibrary[e.path[2].rowIndex - 1];
+function deleteBook() {
+    console.log(bookToRemove);
     myLibrary.splice(bookToRemove, 1);
     modalDelete.style.display = "none";
     generateTable();
@@ -85,14 +99,14 @@ function generateTable() {
     // Loop through each book in the library
     for (let element of myLibrary) {
         let row = tbody.insertRow();
-
+        
         // Loop through each information of the book
         for (key in element) {
             let cell = row.insertCell();
             let text = document.createTextNode(element[key]);
             cell.appendChild(text);
         }
-
+        
         // Add an update read button
         let cell = row.insertCell();
         let readUpdate = document.createElement('input');
@@ -103,7 +117,7 @@ function generateTable() {
         readUpdate.value = element.read == "Not read" ? "0" : "1";
         cell.appendChild(readUpdate);
         readUpdate.addEventListener('change', updateRead);
-
+        
         // Add a delete button for each book
         let delCell = row.insertCell();
         let deleteBtn = document.createElement('button');
@@ -117,6 +131,7 @@ function generateTable() {
 // Event listeners
 span.addEventListener('click', closeModal);
 addBookBtn.addEventListener('click', openModal);
+
 confirmDeleteBtn.addEventListener('click', deleteBook);
 cancelDeleteBtn.addEventListener('click', () => {
     modalDelete.style.display = "none";
