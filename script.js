@@ -1,28 +1,29 @@
-const entryInfo = document.querySelectorAll('.book-entry');
-const submitEntryBtn = document.querySelector('#submit-entry');
-const readYesNoSlider = document.querySelector('#read');
-const readYesNoTxt = document.querySelector('#yes-no');
-const modal = document.querySelector('#myModal');
-const modalDelete = document.querySelector('#delete-modal');
-const addBookBtn = document.querySelector('#add-book-popup');
-const span = document.getElementsByClassName('close')[0];
-const entryError = document.querySelector('#incomplete-entry');
-const deleteCheckTxt = document.querySelector('#delete-check');
-const confirmDeleteBtn = document.querySelector('#confirm-delete');
-const cancelDeleteBtn = document.querySelector('#cancel-delete');
+const entryInfo = document.querySelectorAll(".book-entry");
+const submitEntryBtn = document.querySelector("#submit-entry");
+const readYesNoSlider = document.querySelector("#read");
+const readYesNoTxt = document.querySelector("#yes-no");
+const modal = document.querySelector("#myModal");
+const modalDelete = document.querySelector("#delete-modal");
+const addBookBtn = document.querySelector("#add-book-popup");
+const span = document.getElementsByClassName("close")[0];
+const entryError = document.querySelector("#incomplete-entry");
+const deleteCheckTxt = document.querySelector("#delete-check");
+const confirmDeleteBtn = document.querySelector("#confirm-delete");
+const cancelDeleteBtn = document.querySelector("#cancel-delete");
+const loginModal = document.querySelector(".loginModal");
 
 let myLibrary = [];
 
 class Book {
-    constructor(title, author, pages, read) {
-        this.title = title;
-        this.author = author;
-        this.pages = pages;
-        this.read = read;    
-    }
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
-const theSapiens = new Book("Sapiens", "Yuval Noah Harari", "512", "Read")
+const theSapiens = new Book("Sapiens", "Yuval Noah Harari", "512", "Read");
 myLibrary.push(theSapiens);
 
 // function Book(title, author, pages, read) {
@@ -33,110 +34,148 @@ myLibrary.push(theSapiens);
 // }
 
 function openModal() {
-    modal.style.display = "block";
+  modal.style.display = "block";
 }
 
 function closeModal() {
-    for (let i = 0; i < entryInfo.length - 1; i++) {
-        entryInfo[i].value = "";
-    }
-    entryError.textContent = "";
-    modal.style.display = "none";
+  for (let i = 0; i < entryInfo.length - 1; i++) {
+    entryInfo[i].value = "";
+  }
+  entryError.textContent = "";
+  modal.style.display = "none";
 }
 
 function addBookToLibrary() {
-    // Make sure no fields are empty.
-    for (let i = 0; i < entryInfo.length - 1; i++) {
-        if (entryInfo[i].value == "") {
-            entryError.style.color = "red";
-            entryError.textContent = "Complete all fields before submitting";
-            return;
-        }
+  // Make sure no fields are empty.
+  for (let i = 0; i < entryInfo.length - 1; i++) {
+    if (entryInfo[i].value == "") {
+      entryError.style.color = "red";
+      entryError.textContent = "Complete all fields before submitting";
+      return;
     }
-    let isRead = entryInfo[3].value == 0 ? "Not read" : "Read";
-    myLibrary.push(new Book(entryInfo[0].value, entryInfo[1].value, entryInfo[2].value, isRead))
+  }
+  let isRead = entryInfo[3].value == 0 ? "Not read" : "Read";
+  myLibrary.push(
+    new Book(entryInfo[0].value, entryInfo[1].value, entryInfo[2].value, isRead)
+  );
 
-    // Book.prototype = new Book(entryInfo[0].value, entryInfo[1].value,
-    //     entryInfo[2].value, isRead);
-    // myLibrary.push(Book.prototype);
+  // Book.prototype = new Book(entryInfo[0].value, entryInfo[1].value,
+  //     entryInfo[2].value, isRead);
+  // myLibrary.push(Book.prototype);
 
-    closeModal();
-    generateTable();
+  closeModal();
+  generateTable();
 }
 
 let booktoRemove;
 
 function confirmDeleteBook(e) {
-    bookToRemove = e.path[2].rowIndex - 1;
-    console.log(e);
-    deleteCheckTxt.textContent = `Are you sure you want to delete "${e.path[2].cells[0].textContent}" by ${e.path[2].cells[1].textContent}?`;
-    modalDelete.style.display = "block";
+  bookToRemove = e.path[2].rowIndex - 1;
+  console.log(e);
+  deleteCheckTxt.textContent = `Are you sure you want to delete "${e.path[2].cells[0].textContent}" by ${e.path[2].cells[1].textContent}?`;
+  modalDelete.style.display = "block";
 }
 
 function deleteBook() {
-    console.log(bookToRemove);
-    myLibrary.splice(bookToRemove, 1);
-    modalDelete.style.display = "none";
-    generateTable();
+  console.log(bookToRemove);
+  myLibrary.splice(bookToRemove, 1);
+  modalDelete.style.display = "none";
+  generateTable();
 }
 
 function updateRead(e) {
-    currentRead = myLibrary[e.path[2].rowIndex - 1].read;
-    myLibrary[e.path[2].rowIndex - 1].read = currentRead == "Not read" ? "Read" : "Not read";
-    generateTable();
+  currentRead = myLibrary[e.path[2].rowIndex - 1].read;
+  myLibrary[e.path[2].rowIndex - 1].read =
+    currentRead == "Not read" ? "Read" : "Not read";
+  generateTable();
 }
 
-let table = document.querySelector('table');
+let table = document.querySelector("table");
 let tableKeys = Object.keys(myLibrary[0]);
 
-const tbody = document.querySelector('#tbody');
+const tbody = document.querySelector("#tbody");
 
 function generateTable() {
-    // Empty current grid
-    while (tbody.lastElementChild) {
-        tbody.removeChild(tbody.lastElementChild);
+  // Empty current grid
+  while (tbody.lastElementChild) {
+    tbody.removeChild(tbody.lastElementChild);
+  }
+  // Loop through each book in the library
+  for (let element of myLibrary) {
+    let row = tbody.insertRow();
+
+    // Loop through each information of the book
+    for (key in element) {
+      let cell = row.insertCell();
+      let text = document.createTextNode(element[key]);
+      cell.appendChild(text);
     }
-    // Loop through each book in the library
-    for (let element of myLibrary) {
-        let row = tbody.insertRow();
-        
-        // Loop through each information of the book
-        for (key in element) {
-            let cell = row.insertCell();
-            let text = document.createTextNode(element[key]);
-            cell.appendChild(text);
-        }
-        
-        // Add an update read button
-        let cell = row.insertCell();
-        let readUpdate = document.createElement('input');
-        readUpdate.type = "range";
-        readUpdate.class = "read-status"
-        readUpdate.min = "0";
-        readUpdate.max = "1";
-        readUpdate.value = element.read == "Not read" ? "0" : "1";
-        cell.appendChild(readUpdate);
-        readUpdate.addEventListener('change', updateRead);
-        
-        // Add a delete button for each book
-        let delCell = row.insertCell();
-        let deleteBtn = document.createElement('button');
-        let deleteTxt = document.createTextNode('Delete');
-        deleteBtn.appendChild(deleteTxt);
-        delCell.appendChild(deleteBtn);
-        deleteBtn.addEventListener('click', confirmDeleteBook);
-    }
+
+    // Add an update read button
+    let cell = row.insertCell();
+    let readUpdate = document.createElement("input");
+    readUpdate.type = "range";
+    readUpdate.class = "read-status";
+    readUpdate.min = "0";
+    readUpdate.max = "1";
+    readUpdate.value = element.read == "Not read" ? "0" : "1";
+    cell.appendChild(readUpdate);
+    readUpdate.addEventListener("change", updateRead);
+
+    // Add a delete button for each book
+    let delCell = row.insertCell();
+    let deleteBtn = document.createElement("button");
+    let deleteTxt = document.createTextNode("Delete");
+    deleteBtn.appendChild(deleteTxt);
+    delCell.appendChild(deleteBtn);
+    deleteBtn.addEventListener("click", confirmDeleteBook);
+  }
+}
+
+function checkLogin() {
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+
+	if (name.value.length == 0) {
+		name.setCustomValidity("Please enter your name.");
+	} else {
+		name.setCustomValidity("");
+	}
+	if (email.value.length == 0) {
+		email.setCustomValidity("Please enter your e-mail.");
+	} else {
+		email.setCustomValidity("");
+	}
+  if (name.value.length > 0 && email.value.length > 0) {
+    loginModal.style.display = "none";
+  }
 }
 
 // Event listeners
-span.addEventListener('click', closeModal);
-addBookBtn.addEventListener('click', openModal);
+span.addEventListener("click", closeModal);
+addBookBtn.addEventListener("click", openModal);
 
-confirmDeleteBtn.addEventListener('click', deleteBook);
-cancelDeleteBtn.addEventListener('click', () => {
-    modalDelete.style.display = "none";
+confirmDeleteBtn.addEventListener("click", deleteBook);
+cancelDeleteBtn.addEventListener("click", () => {
+  modalDelete.style.display = "none";
 });
-submitEntryBtn.addEventListener('click', addBookToLibrary);
-readYesNoSlider.addEventListener('change', () => readYesNoTxt.textContent = readYesNoTxt.textContent == "No" ? "Yes" : "No");
+submitEntryBtn.addEventListener("click", addBookToLibrary);
+readYesNoSlider.addEventListener(
+  "change",
+  () =>
+    (readYesNoTxt.textContent = readYesNoTxt.textContent == "No" ? "Yes" : "No")
+);
+
+function renderLoginModal() {
+  const loginModal = document.createElement("div");
+  const loginModalContent = document.createElement("div");
+  const loginForm = document.createElement("form");
+}
+window.addEventListener("click", (e) => {
+  console.log(e);
+});
+
+const loginBtn = document.querySelector("#login-button");
+loginBtn.addEventListener("click", checkLogin);
 
 generateTable();

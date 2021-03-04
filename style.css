@@ -1,106 +1,112 @@
 body {
-    background-image: url(images/papyrus-dark.png);
-    /* opacity: 0.5; */
-    font-family: monospace;
-    color:#fff;
-    font-size: 20px;
+  background-image: url(images/papyrus-dark.png);
+  /* opacity: 0.5; */
+  font-family: monospace;
+  color: #fff;
+  font-size: 20px;
 }
 
 #container {
-    margin: 0px auto;
-    min-width: 680px;
-    max-width: 1080px;
+  margin: 0px auto;
+  min-width: 680px;
+  max-width: 1080px;
 }
 
 #header {
-    margin: 10px;
-    margin-top: 20px;
+  margin: 10px;
+  margin-top: 20px;
 }
 
 #header-text {
-    margin: auto!important;
-    font-size: 46px;
-    font-weight: 900;
-    color: #000;
-    margin: 0;
-    background-color: #ffbb00;
-    letter-spacing: -3px;
-    padding: 8px;
-    width: fit-content;
-    border-radius: 10px;
+  margin: auto !important;
+  font-size: 46px;
+  font-weight: 900;
+  color: #000;
+  margin: 0;
+  background-color: #ffbb00;
+  letter-spacing: -3px;
+  padding: 8px;
+  width: fit-content;
+  border-radius: 10px;
 }
 
 button {
-    font-size: 100%;
-    font-weight: 800;
-    border: 0;
-    padding: 8px;
-    background-color: #ffbb00;
-    border-radius: 5px;
-    cursor: pointer;
+  font-size: 100%;
+  font-weight: 800;
+  border: 0;
+  padding: 8px;
+  background-color: #ffbb00;
+  border-radius: 5px;
+  cursor: pointer;
 }
 button:hover {
-    transform: scale(1.05)
+  transform: scale(1.05);
 }
 
 #new-book {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .book-entry {
-    font-family: monospace;
-    margin: 5px;
-    height: 25px;
+  font-family: monospace;
+  margin: 5px;
+  height: 25px;
 }
 
 .modal {
-    color: #ffbb00;
-    font-size: 20px;
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    margin: 50px auto;
-    width: 350px;
-    left: 0%;
-    right: 0%;
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    box-shadow: 5px 5px 5px  rgba(0, 0, 0, 0.678);
-    border-radius: 10px;
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.5s;
-    animation-name: animatetop;
-    animation-duration: 0.5s;
+  color: #ffbb00;
+  font-size: 20px;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  margin: 50px auto;
+  width: 350px;
+  left: 0%;
+  right: 0%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.678);
+  border-radius: 10px;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.5s;
+  animation-name: animatetop;
+  animation-duration: 0.5s;
 }
 
 /* Add Animation */
 @keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 100px; opacity: 1}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 100px;
+    opacity: 1;
+  }
 }
 
 .modal-header {
-    /* font-size: 30px; */
-    flex-grow: 1;
-    display: flex;
-    padding: 5px 8px;
-    background-color: #ffbb00;
-    color: rgb(0, 0, 0);
-    margin: 0px;
+  /* font-size: 30px; */
+  flex-grow: 1;
+  display: flex;
+  padding: 5px 8px;
+  background-color: #ffbb00;
+  color: rgb(0, 0, 0);
+  margin: 0px;
 }
 .modal-header h2 {
-    font-size: 30px;
-    letter-spacing: -2px;
-    word-spacing: -12px;
-    font-weight: 800;
-    flex-grow: 1;
-    margin: 6px 0;
-    text-align: center;
+  font-size: 30px;
+  letter-spacing: -2px;
+  word-spacing: -12px;
+  font-weight: 800;
+  flex-grow: 1;
+  margin: 6px 0;
+  text-align: center;
 }
 
 .close {
-    right: 0;
-    cursor: pointer;
+  right: 0;
+  cursor: pointer;
 }
 /* .close:hover,
 .close:focus {
@@ -110,110 +116,144 @@ button:hover {
 } */
 
 .modal-body {
-    margin: 20px auto;
-    width: 300px;
-    text-align: center;
-    padding: 2px 16px;
+  margin: 20px auto;
+  width: 300px;
+  text-align: center;
+  padding: 2px 16px;
 }
 
 .modal-content {
-    position: relative;
-    background-color: #b33d3d;
-    /* margin: auto; */
-    padding: 0;
-    border: 1px solid #888;
-    width: 250px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-    -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
-    animation-name: animatetop;
-    animation-duration: 0.4s
+  position: relative;
+  background-color: #b33d3d;
+  /* margin: auto; */
+  padding: 0;
+  border: 1px solid #888;
+  width: 250px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 #incomplete-entry {
-    font-size: 12px;
-    margin: 10px 0 0 0;
+  font-size: 12px;
+  margin: 10px 0 0 0;
 }
 
 #read {
-    width: 30px;
+  width: 30px;
 }
 
 #read-div {
-    display: flex;
-    justify-content: center;
-    align-content:space-around;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
 }
 
 .align-range {
-    /* position:absolute; */
-    margin: 5px 10px;
+  /* position:absolute; */
+  margin: 5px 10px;
 }
 
 #submit-entry {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
-
 #displayContainer {
-    padding: 10px;
-    text-align: center;
+  padding: 10px;
+  text-align: center;
 }
 
 input[type="range"] {
-    -webkit-appearance: none;
-    width: 30%;
-    background: transparent;
-    /* color: #ffbb00; */
+  -webkit-appearance: none;
+  width: 30%;
+  background: transparent;
+  /* color: #ffbb00; */
 }
 
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    border: 1px solid #000000;
-    height: 20px;
-    width: 10px;
-    border-radius: 10px;
-    background: #ffbb00;
-    cursor: pointer;
-    margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 10px;
+  border-radius: 10px;
+  background: #ffbb00;
+  cursor: pointer;
+  margin-top: -6px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 
-input[type=range]::-webkit-slider-runnable-track {
-    width: 100%;
-    height: 8.4px;
-    cursor: pointer;
-    box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-    background: #fff;
-    border-radius: 1.3px;
-    border: 0.2px solid #010101;
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #fff;
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
 }
-  
-input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #fff;
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #fff;
 }
 
 table {
-    table-layout: fixed;
-    width: 100%;
-    margin: 20px auto;
-    /* border: 1px solid #ffbb00 */
+  table-layout: fixed;
+  width: 100%;
+  margin: 20px auto;
+  /* border: 1px solid #ffbb00 */
 }
 
 table,
 td,
 th {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
 th,
 td {
-    padding: 10px;
-    border: solid 1px #ffbb00;
-    background-color: #000;
-    /* text-align: center; */
+  padding: 10px;
+  border: solid 1px #ffbb00;
+  background-color: #000;
+  /* text-align: center; */
 }
 
 #tbody {
-    font-size: 16px;
+  font-size: 16px;
+}
+
+.loginModal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  /* opacity: .75; */
+  /* background-color: #202124;  */
+}
+
+.loginModalContent {
+  color: #fefefe;
+  background-color: #202124;
+  border-radius: 10px;
+  margin: 8em auto; /* 15% from the top and centered */
+  padding: 0 20px 20px 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.6);
+}
+
+.loginModalContent form p {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#name, #email {
+    margin: 0.5rem 0;
 }
